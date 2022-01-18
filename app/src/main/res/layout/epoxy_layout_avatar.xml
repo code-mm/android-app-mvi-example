@@ -1,4 +1,5 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -7,18 +8,24 @@
             type="Integer" />
 
         <variable
-            name="width"
-            type="Float" />
-
-        <variable
-            name="height"
-            type="Float" />
+            name="url"
+            type="String" />
 
     </data>
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@{src}" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            app:error="@{src}"
+            app:imageUrl="@{url}"
+            app:placeHolder="@{src}" />
+
+    </RelativeLayout>
 
 </layout>

@@ -16,10 +16,11 @@ import com.airbnb.mvrx.MavericksViewModel
 import com.ms.app.R
 
 import com.ms.app.avatar
+import com.ms.app.nickname
 import com.ms.app.util.ToDoEpoxyController
 
 abstract class BaseFragment : Fragment(), MavericksView {
-    protected lateinit var epoxyRecyclerView: EpoxyRecyclerView
+    private lateinit var epoxyRecyclerView: EpoxyRecyclerView
     protected val epoxyController by lazy { epoxyController() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +49,9 @@ abstract class BaseFragment : Fragment(), MavericksView {
 
     override fun invalidate() {
         epoxyRecyclerView.requestModelBuild()
-
     }
 
     abstract fun epoxyController(): ToDoEpoxyController
-
-
     fun <T : MavericksState> EpoxyController.buildEpoxyRows(
         viewModel: MavericksViewModel<T>,
         datas: List<UIDataModel>
@@ -65,7 +63,12 @@ abstract class BaseFragment : Fragment(), MavericksView {
                         avatar {
                             id("${it.id}")
                             src(it.resId)
-
+                        }
+                    }
+                    is UIDataModel.Nickname -> {
+                        nickname {
+                            id("${it.id}")
+                            nickname("${it.nickname}")
                         }
                     }
                 }
