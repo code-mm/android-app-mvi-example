@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -22,7 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -33,8 +34,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-}
 
+    dataBinding {
+        enabled = true
+    }
+    viewBinding {
+        enabled = true
+    }
+}
+kapt {
+    correctErrorTypes = true
+}
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -46,4 +56,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.airbnb.android:mavericks:2.5.1'
+
+    implementation "com.airbnb.android:epoxy:5.0.0-beta05"
+    // Add the annotation processor if you are using Epoxy's annotations (recommended)
+    kapt "com.airbnb.android:epoxy-processor:5.0.0-beta05"
+
+    implementation("com.airbnb.android:epoxy-databinding:5.0.0-beta05")
 }
